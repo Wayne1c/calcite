@@ -449,7 +449,7 @@ public abstract class ReturnTypes {
    * Type-inference strategy whereby the result type of a call is
    * {@link #DECIMAL_SCALE_N} with a fallback to {@link #ARG0_NULLABLE}
    */
-  public static final SqlReturnTypeInference SCAL1E_N_OR_ARG0_NULLABLE =
+  public static final SqlReturnTypeInference SCALE_N_OR_ARG0_NULLABLE =
       chain(DECIMAL_SCALE_N, ARG0_NULLABLE);
 
   /**
