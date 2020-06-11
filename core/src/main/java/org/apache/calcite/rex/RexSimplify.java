@@ -213,7 +213,7 @@ public class RexSimplify {
     // KE-14077
     // '1' = 1 becomes true
     // '1.0' = 1 becomes true
-    // '1.1' = 1 becomes true
+    // '1.1' = 1 becomes false
     if (o0.isA(SqlKind.LITERAL)
         && o1.isA(SqlKind.LITERAL)) {
       if (o0.getType().equals(o1.getType())) {
