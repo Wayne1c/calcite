@@ -223,20 +223,28 @@ public class RexSimplify {
         return simplifyComparisonLiteral(e.getKind(), v0, v1, e.getType());
       } else if (CHARACTER == o0.getType().getSqlTypeName().getFamily()
               && NUMERIC == o1.getType().getSqlTypeName().getFamily()) {
-        Object obj0 = ((RexLiteral) o0).getValue2(); // String
-        Object obj1 = ((RexLiteral) o1).getValue3(); // Number
+        try {
+          Object obj0 = ((RexLiteral) o0).getValue2(); // String
+          Object obj1 = ((RexLiteral) o1).getValue3(); // Number
 
-        return simplifyComparisonLiteral(e.getKind(),
-                obj0 == null ? null : new BigDecimal((String) obj0),
-                obj1 == null ? null : new BigDecimal(String.valueOf(obj1)), e.getType());
+          return simplifyComparisonLiteral(e.getKind(),
+                  obj0 == null ? null : new BigDecimal((String) obj0),
+                  obj1 == null ? null : new BigDecimal(String.valueOf(obj1)), e.getType());
+        } catch (Exception ex) {
+          // go original path
+        }
       } else if (NUMERIC == o0.getType().getSqlTypeName().getFamily()
               && CHARACTER == o1.getType().getSqlTypeName().getFamily()) {
-        Object obj0 = ((RexLiteral) o0).getValue3(); // Number
-        Object obj1 = ((RexLiteral) o1).getValue2(); // String
+        try {
+          Object obj0 = ((RexLiteral) o0).getValue3(); // Number
+          Object obj1 = ((RexLiteral) o1).getValue2(); // String
 
-        return simplifyComparisonLiteral(e.getKind(),
-                obj0 == null ? null : new BigDecimal(String.valueOf(obj0)),
-                obj1 == null ? null : new BigDecimal((String) obj1), e.getType());
+          return simplifyComparisonLiteral(e.getKind(),
+                  obj0 == null ? null : new BigDecimal(String.valueOf(obj0)),
+                  obj1 == null ? null : new BigDecimal((String) obj1), e.getType());
+        } catch (Exception ex) {
+          // go original path
+        }
       }
     }
 
